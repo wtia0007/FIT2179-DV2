@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Malaysia Forest & Economy Narrative</title>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+  <style>
+    :root { --accent: #2d6a4f; --text: #34495e; --bg: #fdfdfd; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; margin: 0; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
+    
+    header { text-align: center; margin-bottom: 60px; border-bottom: 1px solid #eee; padding-bottom: 30px; }
+    h1 { color: #1b4332; font-size: 2.4rem; margin-bottom: 10px; }
+    .meta { color: #7f8c8d; font-size: 0.9rem; }
+
+    .section { margin-bottom: 80px; }
+    .section-title { font-size: 1.5rem; color: var(--accent); margin-bottom: 20px; border-left: 5px solid var(--accent); padding-left: 15px; }
+    .story-text { margin-bottom: 30px; font-size: 1.05rem; color: #505050; }
+
+    .viz-row { display: flex; flex-wrap: wrap; gap: 30px; }
+    .viz-box { flex: 1 1 calc(50% - 30px); min-width: 350px; background: white; padding: 20px; border-radius: 10px; border: 1px solid #f0f0f0; }
+    .full-width { flex: 1 1 100%; }
+
+    .vega-container { width: 100%; height: 350px; }
+    
+    footer { text-align: center; padding: 40px; color: #bdc3c7; font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>The Price of Growth: Malaysia's Forest Loss & Palm Oil</h1>
+    <div class="meta">Student ID: 34402225 | Name: Tian YiCheng | Data: GFW & MPOB</div>
+  </header>
+
+  <div class="section">
+    <h2 class="section-title">I. Geographic and Sectoral Context</h2>
+    <p class="story-text">
+      The map below illustrates the intensity of tree cover loss across Malaysia. <strong>Sarawak and Sabah</strong> consistently show higher loss levels, largely driven by large-scale land conversion. By observing the Donut and Area charts, we can see that <strong>Permanent Agriculture</strong> and <strong>Logging</strong> remain the dominant forces behind this change.
+    </p>
+    <div class="viz-row">
+      <div class="viz-box full-width"><div id="vis1" class="vega-container"></div></div>
+      <div class="viz-item" style="flex: 1 1 30%;"><div id="vis2" class="vega-container"></div></div>
+      <div class="viz-item" style="flex: 1 1 60%;"><div id="vis3" class="vega-container"></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">II. Economic Impetus: The Palm Oil Factor</h2>
+    <p class="story-text">
+      As a global leader in palm oil production, Malaysia's economy is tightly linked to commodity prices. The <strong>Scatter Plot</strong> shows a positive correlation between price spikes and production increases. The <strong>Bubble Chart</strong> highlights how "hot years" (high price) often align with periods of significant land use pressure.
+    </p>
+    <div class="viz-row">
+      <div class="viz-box"><div id="vis4" class="vega-container"></div></div>
+      <div class="viz-box"><div id="vis5" class="vega-container"></div></div>
+      <div class="viz-box full-width"><div id="vis10" class="vega-container"></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">III. Regional Vulnerability & Protection</h2>
+    <p class="story-text">
+      Different states employ different land management strategies. While the <strong>Lollipop Chart</strong> shows the remaining forest reserves, the <strong>Stacked Proportion</strong> chart reveals that in states like Pahang, the relative impact of "Logging" is much higher than in others. Use the <strong>Dynamic Filter</strong> to explore specific drivers per state.
+    </p>
+    <div class="viz-row">
+      <div class="viz-box"><div id="vis6" class="vega-container"></div></div>
+      <div class="viz-box"><div id="vis7" class="vega-container"></div></div>
+      <div class="viz-box full-width"><div id="vis8" class="vega-container"></div></div>
+      <div class="viz-box full-width"><h3>Loss Intensity Heatmap (Yearly)</h3><div id="vis9" class="vega-container"></div></div>
+    </div>
+  </div>
+
+  <footer>
+    FIT2179 Data Visualisation 2
+  </footer>
+</div>
+
+<script>
+  const p = "js/"; 
+  const opt = { actions: false };
+
+  vegaEmbed('#vis1', p + 'map.vg.json', opt);
+  vegaEmbed('#vis2', p + 'driver_donut.vg.json', opt).catch(console.error);
+  vegaEmbed('#vis3', p + 'driver_stacked_area.vg.json', opt).catch(console.error);
+  vegaEmbed('#vis4', p + 'price_scatter.vg.json', opt).catch(console.error);
+  vegaEmbed('#vis5', p + 'economy_bubble.vg.json', opt).catch(console.error);
+  vegaEmbed('#vis6', p + 'reserve_lollipop.vg.json', opt).catch(console.error);
+  vegaEmbed('#vis7', p + 'interactive_driver_bar.vg.json', opt).catch(console.error);
+  vegaEmbed('#vis8', p + 'land_use_stacked.vg.json', opt).catch(console.error);
+  vegaEmbed('#vis9', p + 'loss_heatmap.vg.json', opt).catch(console.error);
+  vegaEmbed('#vis10', p + 'economy_line.vg.json', opt).catch(console.error);
+</script>
+</body>
+</html>
