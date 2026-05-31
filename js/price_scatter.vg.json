@@ -1,0 +1,25 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Price vs Production Correlation",
+    "width": "container",
+    "height": 300,
+    "data": {"url": "data/annual_palm_oil_economy.csv"},
+    "layer": [
+      {
+        "mark": "point",
+        "encoding": {
+          "x": {"field": "Average_Price_USD", "type": "quantitative", "title": "Avg Price (USD)"},
+          "y": {"field": "Production_Tonnes", "type": "quantitative", "title": "Production (Tonnes)"},
+          "tooltip": [{"field": "Year"}, {"field": "Average_Price_USD", "title": "Price"}, {"field": "Production_Tonnes", "title": "Production"}]
+        }
+      },
+      {
+        "mark": {"type": "line", "color": "red"},
+        "transform": [{"regression": "Production_Tonnes", "on": "Average_Price_USD"}],
+        "encoding": {
+          "x": {"field": "Average_Price_USD", "type": "quantitative"},
+          "y": {"field": "Production_Tonnes", "type": "quantitative"}
+        }
+      }
+    ]
+  }

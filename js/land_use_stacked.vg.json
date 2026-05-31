@@ -1,0 +1,40 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Proportion of Forest Loss by Driver (Per State)",
+    "width": "container",
+    "height": 300,
+    "autosize": {"type": "fit", "contains": "padding"},
+    "data": {"url": "data/cleaned_driver.csv"},
+    "transform": [
+      {
+        "filter": "datum.tc_loss_ha > 0"
+      }
+    ],
+    "mark": "bar",
+    "encoding": {
+      "y": {
+        "field": "subnational1",
+        "type": "nominal",
+        "title": "State",
+        "sort": "-x"
+      },
+      "x": {
+        "aggregate": "sum",
+        "field": "tc_loss_ha",
+        "type": "quantitative",
+        "stack": "normalize",
+        "title": "Percentage of Loss (%)"
+      },
+      "color": {
+        "field": "driver",
+        "type": "nominal",
+        "scale": {"scheme": "tableau10"},
+        "title": "Loss Driver"
+      },
+      "tooltip": [
+        {"field": "subnational1", "title": "State"},
+        {"field": "driver", "title": "Main Driver"},
+        {"aggregate": "sum", "field": "tc_loss_ha", "title": "Loss Area (ha)", "format": ","}
+      ]
+    }
+  }

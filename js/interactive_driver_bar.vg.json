@@ -1,0 +1,19 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Forest Loss Volume by Driver",
+    "width": "container",
+    "height": 300,
+    "autosize": {"type": "fit", "contains": "padding"},
+    "data": {"url": "data/cleaned_driver.csv"},
+    "params": [
+      {"name": "driver_select", "bind": {"input": "select", "options": [null, "Permanent agriculture", "Logging", "Hard commodities", "Wildfire"], "labels": ["Show All", "Agriculture", "Logging", "Commodities", "Wildfire"], "name": "Driver: "}}
+    ],
+    "transform": [{"filter": "driver_select == null || datum.driver == driver_select"}],
+    "mark": "bar",
+    "encoding": {
+      "y": {"field": "subnational1", "type": "nominal", "sort": "-x", "title": ""},
+      "x": {"aggregate": "sum", "field": "tc_loss_ha", "type": "quantitative", "title": "Total Loss (ha)"},
+      "color": {"field": "driver", "type": "nominal", "scale": {"scheme": "oranges"}, "legend": null},
+      "tooltip": [{"field": "subnational1", "title": "State"}, {"aggregate": "sum", "field": "tc_loss_ha", "title": "Loss (ha)", "format": ","}]
+    }
+  }

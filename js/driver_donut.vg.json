@@ -1,0 +1,15 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Causes of Forest Loss (2001-2023)",
+    "width": "container",
+    "height": 300,
+    "autosize": {"type": "fit", "contains": "padding"},
+    "data": {"url": "data/cleaned_driver.csv"},
+    "transform": [{"aggregate": [{"op": "sum", "field": "tc_loss_ha", "as": "total_loss"}], "groupby": ["driver"]}],
+    "mark": {"type": "arc", "innerRadius": 50, "stroke": "#fff"},
+    "encoding": {
+      "theta": {"field": "total_loss", "type": "quantitative"},
+      "color": {"field": "driver", "type": "nominal", "title": "Driver Type"},
+      "tooltip": [{"field": "driver", "title": "Driver"}, {"field": "total_loss", "title": "Loss (ha)", "format": ","}]
+    }
+  }

@@ -1,0 +1,108 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Forest Loss Map (2001-2023)",
+    "width": "container",
+    "height": 300,
+    "autosize": {"type": "fit", "contains": "padding"},
+    "projection": {"type": "mercator"},
+    "params": [
+      {
+        "name": "Year_selection",
+        "value": 2023,
+        "bind": {
+          "input": "range",
+          "min": 2001,
+          "max": 2023,
+          "step": 1,
+          "name": "Select Year: "
+        }
+      }
+    ],
+    "layer": [
+      {
+        "data": {
+          "url": "data/malaysia.topojson",
+          "format": {"type": "topojson", "feature": "mys_admbnda_adm1_unhcr_20210211"}
+        },
+        "mark": {"type": "geoshape", "fill": "#e0e0e0", "stroke": "white"}
+      },
+      {
+        "data": {
+          "url": "data/cleaned_driver.csv"
+        },
+        "transform": [
+          {"filter": "datum.year == Year_selection"},
+          {
+            "aggregate": [
+              {"op": "sum", "field": "tc_loss_ha", "as": "total_loss"}
+            ],
+            "groupby": ["subnational1"]
+          },
+          {
+            "lookup": "subnational1",
+            "from": {
+              "data": {
+                "url": "../data/malaysia.topojson",
+                "format": {"type": "topojson", "feature": "mys_admbnda_adm1_unhcr_20210211"}
+              },
+              "key": "properties.ADM1_EN"
+            },
+            "as": "geo"
+          }
+        ],
+        "mark": {"type": "geoshape", "stroke": "white"},
+        "encoding": {
+          "shape": {"field": "geo", "type": "geojson"},
+          "color": {
+            "field": "total_loss",
+            "type": "quantitative",
+            "scale": {
+              "scheme": "reds",
+              "domain": [0, 100000]
+            },
+            "title": "Total Loss (ha)"
+          },
+          "tooltip": [
+            {"field": "subnational1", "type": "nominal", "title": "State"},
+            {"field": "total_loss", "type": "quantitative", "title": "Total Loss (ha)", "format": ",.0f"}
+          ]
+        }
+      },
+      {
+        "data": {
+          "values": [
+            {"lon": 110.0, "lat": 4.5, "text": "Sarawak has the highest"}
+          ]
+        },
+        "mark": {
+          "type": "text", 
+          "fontSize": 12, 
+          "fontWeight": "bold", 
+          "color": "black"
+        },
+        "encoding": {
+          "longitude": {"field": "lon", "type": "quantitative"},
+          "latitude": {"field": "lat", "type": "quantitative"},
+          "text": {"field": "text", "type": "nominal"}
+        }
+      },
+      {
+        "data": {
+          "values": [
+            {"lon": 110.0, "lat": 4.0, "text": "overall forest loss"}
+          ]
+        },
+        "mark": {
+          "type": "text", 
+          "fontSize": 12, 
+          "fontWeight": "bold", 
+          "color": "black"
+        },
+        "encoding": {
+          "longitude": {"field": "lon", "type": "quantitative"},
+          "latitude": {"field": "lat", "type": "quantitative"},
+          "text": {"field": "text", "type": "nominal"}
+        }
+      }
+    ]
+  }

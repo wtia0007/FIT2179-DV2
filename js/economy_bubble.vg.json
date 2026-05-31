@@ -1,0 +1,15 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Yearly Production & Price Bubbles",
+    "width": "container",
+    "height": 300,
+    "data": {"url": "data/annual_palm_oil_economy.csv"},
+    "mark": "point",
+    "encoding": {
+      "x": {"field": "Year", "type": "ordinal", "axis": {"labelAngle": -45}},
+      "y": {"field": "Production_Tonnes", "type": "quantitative", "scale": {"zero": false}},
+      "size": {"field": "Average_Price_USD", "type": "quantitative", "scale": {"range": [50, 800]}, "title": "Price (USD)"},
+      "color": {"field": "Average_Price_USD", "type": "quantitative", "scale": {"scheme": "greens"}},
+      "tooltip": [{"field": "Year"}, {"field": "Average_Price_USD"}, {"field": "Production_Tonnes"}]
+    }
+  }

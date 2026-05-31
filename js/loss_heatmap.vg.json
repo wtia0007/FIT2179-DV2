@@ -1,0 +1,15 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Forest Loss Intensity by State",
+    "width": "container",
+    "height": 300,
+    "autosize": {"type": "fit", "contains": "padding"},
+    "data": {"url": "data/cleaned_driver.csv"},
+    "mark": "rect",
+    "encoding": {
+      "x": {"field": "year", "type": "ordinal"},
+      "y": {"field": "subnational1", "type": "nominal", "title": "State"},
+      "color": {"aggregate": "sum", "field": "tc_loss_ha", "type": "quantitative", "scale": {"scheme": "magma"}},
+      "tooltip": [{"field": "subnational1"}, {"field": "year"}, {"field": "tc_loss_ha", "aggregate": "sum"}]
+    }
+  }

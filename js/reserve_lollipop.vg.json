@@ -1,0 +1,16 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Existing Forest Reserves by State (2019)",
+    "width": "container",
+    "height": 300,
+    "autosize": {"type": "fit", "contains": "padding"},
+    "data": {"url": "data/forest_reserve_state.csv"},
+    "transform": [
+      {"filter": "year(datum.date) == 2019"},
+      {"filter": "datum.state != 'Semenanjung Malaysia'"}
+    ],
+    "layer": [
+      {"mark": {"type": "rule", "color": "#2d6a4f"}, "encoding": {"y": {"field": "state", "type": "nominal", "sort": "-x", "title": ""}, "x": {"field": "area", "type": "quantitative", "title": "Area (ha)"}}},
+      {"mark": {"type": "point", "size": 80, "filled": true, "color": "#2d6a4f"}, "encoding": {"y": {"field": "state", "type": "nominal", "sort": "-x"}, "x": {"field": "area", "type": "quantitative"}, "tooltip": [{"field": "state"}, {"field": "area", "format": ","}]}}
+    ]
+  }

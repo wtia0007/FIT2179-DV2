@@ -1,0 +1,15 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Forest Loss Drivers Over Time",
+    "width": "container",
+    "height": 300,
+    "autosize": {"type": "fit", "contains": "padding"},
+    "data": {"url": "data/cleaned_driver.csv"},
+    "mark": "area",
+    "encoding": {
+      "x": {"field": "year", "type": "ordinal", "title": "Year"},
+      "y": {"aggregate": "sum", "field": "tc_loss_ha", "type": "quantitative", "title": "Loss (ha)"},
+      "color": {"field": "driver", "type": "nominal", "scale": {"scheme": "category10"}},
+      "tooltip": [{"field": "year"}, {"field": "driver"}, {"field": "tc_loss_ha", "aggregate": "sum"}]
+    }
+  }
