@@ -20,14 +20,14 @@
     "layer": [
       {
         "data": {
-          "url": "../data/malaysia.topojson",
+          "url": "data/malaysia.topojson",
           "format": {"type": "topojson", "feature": "mys_admbnda_adm1_unhcr_20210211"}
         },
         "mark": {"type": "geoshape", "fill": "#e0e0e0", "stroke": "white"}
       },
       {
         "data": {
-          "url": "../data/cleaned_driver.csv"
+          "url": "data/cleaned_driver.csv"
         },
         "transform": [
           {"filter": "datum.year == Year_selection"},
@@ -41,7 +41,7 @@
             "lookup": "subnational1",
             "from": {
               "data": {
-                "url": "../data/malaysia.topojson",
+                "url": "data/malaysia.topojson",
                 "format": {"type": "topojson", "feature": "mys_admbnda_adm1_unhcr_20210211"}
               },
               "key": "properties.ADM1_EN"
