@@ -3,7 +3,7 @@
   "title": "Palm Oil: Price vs Production",
   "width": 350,
   "height": 300,
-  "data": {"url": "../data/annual_palm_oil_economy.csv"},
+  "data": {"url": "data/annual_palm_oil_economy.csv"},
   "encoding": {"x": {"field": "Year", "type": "ordinal"}},
   "layer": [
     {
