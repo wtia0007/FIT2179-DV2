@@ -1,0 +1,57 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Palm Oil: Price vs Production",
+  "width": 350,
+  "height": 300,
+  "data": {"url": "../data/annual_palm_oil_economy.csv"},
+  "encoding": {"x": {"field": "Year", "type": "ordinal"}},
+  "layer": [
+    {
+      "mark": "line",
+      "encoding": {
+        "y": {
+          "field": "Production_Tonnes",
+          "type": "quantitative",
+          "title": "Production (Tonnes)"
+        },
+        "color": {"value": "#1f77b4"}
+      }
+    },
+    {
+      "mark": {"type": "line", "strokeDash": [5, 5]},
+      "encoding": {
+        "y": {
+          "field": "Average_Price_USD",
+          "type": "quantitative",
+          "title": "Price (USD)"
+        },
+        "color": {"value": "orange"}
+      }
+    },
+    {
+      "mark": {"type": "rule", "color": "red", "strokeDash": [2, 2]},
+      "data": {"values": [{"Year": 2011}]},
+      "encoding": {
+        "x": {"field": "Year", "type": "ordinal"}
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 5,
+        "dy": -100,
+        "fontSize": 11,
+        "fontStyle": "italic",
+        "color": "red"
+      },
+      "data": {"values": [{"Year": 2011}]},
+      "encoding": {
+        "x": {"field": "Year", "type": "ordinal"},
+        "text": {"value": "2011: Historic Price Peak"}
+      }
+    }
+  ],
+  "resolve": {"scale": {"y": "independent"}}
+}
