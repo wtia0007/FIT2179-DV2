@@ -3,7 +3,7 @@
     "title": "Forest Reserve by State (2019)",
     "width": 600,
     "height": 300,
-    "data": {"url": "../data/forest_reserve_state.csv"},
+    "data": {"url": "data/forest_reserve_state.csv"},
     "transform": [
       {"filter": "year(datum.date) == 2019"},
       {"filter": "datum.state != 'Semenanjung Malaysia'"}
