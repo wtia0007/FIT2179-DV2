@@ -42,7 +42,7 @@
             "lookup": "subnational1",
             "from": {
               "data": {
-                "url": "../data/malaysia.topojson",
+                "url": "data/malaysia.topojson",
                 "format": {"type": "topojson", "feature": "mys_admbnda_adm1_unhcr_20210211"}
               },
               "key": "properties.ADM1_EN"
